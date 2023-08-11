@@ -1,6 +1,4 @@
 <template>
-    <Head/>
-
     <div class="content">
             <h1 class="title">Sobre</h1>
             <div class="text">
@@ -12,12 +10,6 @@
 </template>
 
 <script>
-import Head from './Head.vue';
-    export default{
-        components:{
-            Head
-        }
-    }
 </script>
 
 <style scoped>
