@@ -2,16 +2,17 @@
     <div class="container-form">
         <h1 class="title">Cadastro de talento</h1>
         <form @submit.prevent="handleSubmit" class="form-register">
+
             <div class="row1">
                 <div class="field double-column">
                     <label for="name">Nome Completo</label>
-                    <input type="text" id="name" v-model="name" class="red-border" active="false">
-                    
+                    <input type="text" id="name" v-model="name" :class="[this.errors.name ? 'red-border' : 'default',]">
                 </div>
 
                 <div class="field double-column">
                     <label for="email">Email</label>
-                    <input type="email" id="email" v-model="email">
+                    <input type="email" id="email" v-model="email" :class="[this.errors.email ? 'red-border' : 'default',]">
+                    
                 </div>
             </div>
 
@@ -30,8 +31,8 @@
 
             <div class="row3">
                 <div class="field">
-                    <label for="interest">Área de interesse</label>
-                    <select name="interest" id="interest" v-model="area">
+                    <label for="area">Área de interesse</label>
+                    <select name="area" id="area" v-model="area" :class="[this.errors.area ? 'red-border' : 'default',]">
                         <option value="front">Front-End</option>
                         <option value="back">Back-End</option>
                         <option value="full">Fullstack</option>
@@ -127,7 +128,8 @@ export default {
             level: "",
             skills: [],
             apresentation: "",
-            errors: []
+            errors: [],
+            
         }
     },
     methods: {
@@ -169,7 +171,8 @@ export default {
 <style scoped>
 
 .red-border{
-    border-color: red;
+    border-color: rgba(255, 0, 0, 0.568);
+   
 }
 .button {
     display: flex;
