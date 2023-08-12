@@ -1,11 +1,12 @@
 <template>
     <div class="container-form">
         <h1 class="title">Cadastro de talento</h1>
-        <form class="form-register">
+        <form @submit.prevent="handleSubmit" class="form-register">
             <div class="row1">
                 <div class="field double-column">
                     <label for="name">Nome Completo</label>
-                    <input type="text" id="name" v-model="name">
+                    <input type="text" id="name" v-model="name" class="red-border" active="false">
+                    
                 </div>
 
                 <div class="field double-column">
@@ -18,6 +19,7 @@
                 <div class="field double-column">
                     <label for="birthday">Data de nascimento</label>
                     <input type="date" id="birthday" v-model="birthday">
+                    
                 </div>
 
                 <div class="field double-column">
@@ -48,9 +50,9 @@
                 </div>
             </div>
 
-            <div class="row6">
-                <span>Suas habilidades</span>
-                <div class="check-div">
+            <div class="row6" >
+                <span v-if="!area === ''">Suas habilidades</span>
+                <div class="check-div" v-if="area === 'front' || area === 'full'">
                     <div class="check-inputs">
                         <input type="checkbox" id="html" value="html" v-model="skills">
                         <label for="html">HTML</label>
@@ -71,15 +73,34 @@
                         <input type="checkbox" id="react-native" value="react-native" v-model="skills">
                         <label for="react-native">React-Native</label>
                     </div>
+                </div>
+                    
+                <div class="check-div" v-if="area === 'back' || area === 'full'">
                     <div class="check-inputs">
                         <input type="checkbox" id="node" value="node" v-model="skills">
                         <label for="node">Node</label>
+                    </div>
+                    <div class="check-inputs">
+                        <input type="checkbox" id="PHP" value="PHP" v-model="skills">
+                        <label for="PHP">PHP</label>
+                    </div>
+                    <div class="check-inputs">
+                        <input type="checkbox" id="Laravel" value="Laravel" v-model="skills">
+                        <label for="Laravel">Laravel</label>
+                    </div>
+                    <div class="check-inputs">
+                        <input type="checkbox" id="Java" value="Java" v-model="skills">
+                        <label for="Java">Java</label>
+                    </div>
+                    <div class="check-inputs">
+                        <input type="checkbox" id="Python" value="Python" v-model="skills">
+                        <label for="Python">Python</label>
                     </div>
                 </div>
             </div>
             <div class="row7">
                 <div class="text-block">
-                    <textarea placeholder="Digite aqui sua carta de apresentação" name="aboutyou" id="aboutyou"></textarea>
+                    <textarea v-model="apresentation" placeholder="Digite aqui sua carta de apresentação" name="aboutyou" id="aboutyou"></textarea>
                 </div>
             </div>
             <div class="row8">
@@ -94,6 +115,7 @@
 
 <script>
 import * as yup from 'yup'
+import {captureErrorYup} from "../utils/captureErrorYup"
 export default {
     data() {
         return {
@@ -103,11 +125,14 @@ export default {
             whatsapp: "",
             area: "",
             level: "",
-            skills: []
+            skills: [],
+            apresentation: "",
+            errors: []
         }
     },
     methods: {
         handleSubmit() {
+            
             try {
                 const schema = yup.object().shape({
                     name: yup.string().required('O nome é obrigatório'),
@@ -119,10 +144,14 @@ export default {
                     name: this.name,
                     email: this.email,
                     area: this.area
-                })
+                },
+                { abortEarly: false })
+                
             } catch(error){
-                alert("error")
-            }
+                if (error instanceof yup.ValidationError) {
+          this.errors = captureErrorYup(error)
+          console.log(this.errors)
+            }}
 
         }
 
@@ -138,6 +167,10 @@ export default {
 </script>
 
 <style scoped>
+
+.red-border{
+    border-color: red;
+}
 .button {
     display: flex;
     justify-content: end;
@@ -156,7 +189,10 @@ textarea {
     width: 100%;
     height: 100px;
 }
-
+.row6{
+    display: flex;
+    flex-direction: column;
+    }
 .check-div {
     display: flex;
     justify-content: space-between;
@@ -170,6 +206,7 @@ textarea {
 
 .check-inputs {
     display: flex;
+    width: 100%;
     align-items: center;
     gap: 5px;
 }

@@ -3,7 +3,7 @@ import {createRouter, createWebHistory} from 'vue-router'
 //importar telas de aplicacao
 
 import NewTalent from '../components/NewTalent.vue'
-import Header from '../components/Header.vue'
+import Home from '../components/Home.vue'
 import About from '../components/About.vue'
 
 //configurar roteamento
@@ -22,8 +22,8 @@ const router = createRouter({
     },
     {
         path: '/',
-        name: 'header',
-        component: Header
+        name: 'home',
+        component: Home
     }]
 }) 
 export default router
