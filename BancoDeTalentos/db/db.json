@@ -1,0 +1,18 @@
+{
+  "talents": [
+    
+    {
+      "id": "d5742f1c-e576-4173-a421-c3c36da6d16b",
+      "name": "Guilherme Oszika Duarte",
+      "email": "guiduartesbs@hotmail.com",
+      "whatsapp": 3568368,
+      "birthday": "0358-07-31",
+      "area": "front",
+      "level": "junior",
+      "skills": [
+        "css"
+      ],
+      "apresentation": "lorem ipsun"
+    }
+  ]
+}

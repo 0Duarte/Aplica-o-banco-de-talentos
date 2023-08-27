@@ -4,7 +4,7 @@
             <div class="header">
                 <div class="buttons-div">
                     <router-link to="/" class="buttons-header">
-                      <p><router-link to="/cadastro">Home</router-link></p>
+                      <p>Home</p>
                         <img src="./assets//icons/392500_estate_home_house_real_icon.png" alt="">
                     </router-link>
                 </div>

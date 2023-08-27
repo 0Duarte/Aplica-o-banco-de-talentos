@@ -115,6 +115,8 @@
 </template>
 
 <script>
+import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios'
 import * as yup from 'yup'
 import {captureErrorYup} from "../utils/captureErrorYup"
 export default {
@@ -128,12 +130,12 @@ export default {
             level: "",
             skills: [],
             apresentation: "",
-            errors: [],
+            errors: []
             
         }
     },
     methods: {
-        handleSubmit() {
+        async handleSubmit() {
             
             try {
                 const schema = yup.object().shape({
@@ -148,6 +150,29 @@ export default {
                     area: this.area
                 },
                 { abortEarly: false })
+
+                const newTalent = {
+                id: uuidv4(),
+                name: this.name,
+                email: this.email,
+                whatsapp: this.whatsapp,
+                birthday: this.birthday,
+                area: this.area,
+                level: this.level,
+                skills: this.skills,
+                apresentation: this.apresentation
+                }
+
+           await axios.post('http://localhost:3000/talents', newTalent)
+           alert("Talento registrado")
+                this.name=""
+                this.email=""
+                this.whatsapp=""
+                this.birthday=""
+                this.area=""
+                this.level=""
+                this.skills= []
+                this.apresentation=""
                 
             } catch(error){
                 if (error instanceof yup.ValidationError) {
@@ -155,7 +180,7 @@ export default {
           console.log(this.errors)
             }}
 
-        }
+         }
 
     },
     watch: {
