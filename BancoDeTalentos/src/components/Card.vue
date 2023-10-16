@@ -47,7 +47,9 @@
         flex-direction: column;
         gap: 8px;
         border: 1px solid #000;
+        border-radius: 10px;
         padding: 1rem;
+        max-width: 400px;
     }
     .dataRes{
         display: flex;
